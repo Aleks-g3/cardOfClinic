@@ -1,0 +1,160 @@
+﻿<Window x:Class="cardOfClinic.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:cardOfClinic"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="667" Width="639">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="label" Content="HISTORIA ZDROWIA I CHOROBY" HorizontalAlignment="Left" Margin="196,13,0,0" VerticalAlignment="Top" Width="208" FontWeight="Bold" Height="26"/>
+        <Label x:Name="label1" Content="PORADNIA" HorizontalAlignment="Left" Margin="52,81,0,0" VerticalAlignment="Top" Height="26" Width="68"/>
+        <TextBox x:Name="poradnia" HorizontalAlignment="Left" Margin="140,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="204" Height="18" IsEnabled="False"/>
+        <Label x:Name="label2" Content="Nr karty" HorizontalAlignment="Left" Margin="351,81,0,0" VerticalAlignment="Top" Height="26" Width="53"/>
+        <TextBox x:Name="nrKarty" HorizontalAlignment="Left" Margin="422,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="dataZarej" IsReadOnly="True" HorizontalAlignment="Left" Margin="393,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Height="18"/>
+        <Label x:Name="label3" Content="Data zarejestrowania" HorizontalAlignment="Left" Margin="264,117,0,0" VerticalAlignment="Top" Height="26" Width="120"/>
+        <Image x:Name="calendar" HorizontalAlignment="Left" Height="34" Margin="525,121,0,0" VerticalAlignment="Top" Width="25" Source="/iconfinder_calendar_285670.png" MouseUp="calendar_MouseUp" IsEnabled="False" />
+        <Label x:Name="label4" Content="Nazwisko" HorizontalAlignment="Left" Margin="59,153,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <Label x:Name="label4_Copy" Content="Imię/Imona" HorizontalAlignment="Left" Margin="283,153,0,0" VerticalAlignment="Top" Height="26" Width="71"/>
+        <Label x:Name="label4_Copy1" Content="Data urodzenia" HorizontalAlignment="Left" Margin="55,182,0,0" VerticalAlignment="Top" Height="26" Width="91"/>
+        <Label x:Name="label4_Copy2" Content="Telefon" HorizontalAlignment="Left" Margin="318,182,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+        <Label x:Name="label4_Copy3" Content="Adres" HorizontalAlignment="Left" Margin="59,213,0,0" VerticalAlignment="Top" Height="26" Width="40"/>
+        <Label x:Name="label4_Copy4" Content="Pesel" HorizontalAlignment="Left" Margin="59,244,0,0" VerticalAlignment="Top" Height="26" Width="37"/>
+        <Label x:Name="label4_Copy5" Content="Płeć" HorizontalAlignment="Left" Margin="302,244,0,0" VerticalAlignment="Top" Height="26" Width="32"/>
+        <Label x:Name="label4_Copy6" Content="Podstawa ubezpieczenia" HorizontalAlignment="Left" Margin="57,275,0,0" VerticalAlignment="Top" Height="26" Width="139"/>
+        <Label x:Name="label4_Copy7" Content="Osoba upoważniona" HorizontalAlignment="Left" Margin="64,337,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="124"/>
+        <Button x:Name="choroby" Content="Choroby" HorizontalAlignment="Left" Margin="69,317,0,0" VerticalAlignment="Top" Height="20" Width="473" IsEnabled="False" Click="choroby_Click"/>
+        <Button x:Name="otworz" Content="Otwórz plik" HorizontalAlignment="Left" Margin="63,16,0,0" VerticalAlignment="Top" Height="20" Width="65" Click="otworz_Click"/>
+
+        <Button x:Name="zapisz" Content="Zapisz" HorizontalAlignment="Left" Margin="436,21,0,0" VerticalAlignment="Top" Height="20" Width="36" IsEnabled="False" Click="zapisz_Click"/>
+        <TextBox x:Name="nazwisko" HorizontalAlignment="Left" Margin="126,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="148" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="imie" HorizontalAlignment="Left" Margin="365,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="dataUrodz" IsReadOnly="True" HorizontalAlignment="Left" Margin="156,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="adres" IsReadOnly="True" HorizontalAlignment="Left" Margin="105,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="437" Height="18" IsEnabled="False" PreviewMouseDown="adres_PreviewMouseDown"/>
+        <TextBox x:Name="pesel" HorizontalAlignment="Left" Margin="105,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Height="18" MaxLength="11" IsEnabled="False"/>
+        <ComboBox x:Name="plec" HorizontalAlignment="Left" Margin="342,248,0,0"  VerticalAlignment="Top" Width="200" Height="21" IsEnabled="False">
+            <ComboBoxItem>mezczyzna</ComboBoxItem>
+            <ComboBoxItem>kobieta</ComboBoxItem>
+        </ComboBox>
+        <TextBox x:Name="podstawaUbez" HorizontalAlignment="Left" Margin="206,279,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="telefon" HorizontalAlignment="Left" Margin="388,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="18" IsEnabled="False"/>
+
+        <ListView x:Name="listView" Margin="61,399,86,137" Height="100" SelectionChanged="listView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Imię i Nazwisko" Width="120" DisplayMemberBinding="{Binding imie_nazwisko}"/>
+                    <GridViewColumn Header="Adres" Width="120" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1} {2} {3}">
+                                            <Binding Path="adres_upowaznionego.ulica"/>
+                                            <Binding Path="adres_upowaznionego.numer"/>
+                                            <Binding Path="adres_upowaznionego.kod_pocztowy"/>
+                                            <Binding Path="adres_upowaznionego.miasto"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Data urodzenia/Nr dowodu/Pesel" Width="120" DisplayMemberBinding="{Binding Item}"/>
+                    <GridViewColumn Header="Nr telefonu" Width="120" DisplayMemberBinding="{Binding nr_telefonu}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Popup x:Name="oknoChoroby" IsOpen="False" Width="700" Height="300" Placement="Center">
+            <Grid Background="Aqua">
+
+                <Button x:Name="zamknij" Content="Zamknij" Click="zamknij_Click" Width="65" Height="20" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                <ListView x:Name="listViewChoroby" Width="600" Height="100" Margin="0,-1,0,0"  >
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Data wizyty" Width="150" DisplayMemberBinding="{Binding data_wizyty}"/>
+                            <GridViewColumn Header="Rozpoznanie icd10" Width="150" DisplayMemberBinding="{Binding rozpoznanie_icd10}"/>
+                            <GridViewColumn Header="Rozpoznanie" Width="150" DisplayMemberBinding="{Binding rozpoznanie}"/>
+                            <GridViewColumn Header="Nazwisko lekarza" Width="150" DisplayMemberBinding="{Binding nazwisko_lekarza}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Label Content="Data wizyty" VerticalAlignment="Bottom" Margin="10,0,0,30"/>
+                <TextBox x:Name="dataWizyty" Text="" Width="120" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,10" IsEnabled="False" />
+                <Image x:Name="oknoCalendar" Width="25" Source="/iconfinder_calendar_285670.png" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="130,0,0,10" MouseUp="oknoCalendar_MouseUp"/>
+                <GroupBox x:Name="groupBox1" Height="200" Width="200" Visibility="Hidden">
+                    <Calendar x:Name="calendartOfGroup" SelectedDatesChanged="calendartOfGroup_SelectedDatesChanged"/>
+                </GroupBox>
+                <Label Content="Rozpoznanie icd10" VerticalAlignment="Bottom" Margin="160,0,0,30"/>
+                <TextBox x:Name="rozpoznanieIcd10" Text="" Width="120" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="160,0,0,10" IsEnabled="True" />
+                <Label Content="Rozpoznanie" VerticalAlignment="Bottom" Margin="320,0,0,30"/>
+                <TextBox x:Name="rozpoznanie" Text="" Width="120" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="320,0,0,10" IsEnabled="True" />
+                <Label Content="Nazwisko lekarza" VerticalAlignment="Bottom" Margin="480,0,0,30"/>
+                <TextBox x:Name="nazwiskoLekarza" Text="" Width="120" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="480,0,0,10" IsEnabled="True" />
+                <Button x:Name="dodaj" Content="Dodaj" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="640,0,0,10" Click="dodaj_Click"/>
+
+
+
+
+            </Grid>
+        </Popup>
+        <GroupBox x:Name="groupBox" Height="200" Width="200" Margin="63,49,376,217" Visibility="Hidden">
+            <Calendar SelectedDatesChanged="Calendar_SelectedDatesChanged"/>
+        </GroupBox>
+        <Button x:Name="zapiszJako" Content="Zapisz jako" HorizontalAlignment="Left" Margin="487,21,0,0" VerticalAlignment="Top" IsEnabled="False" Click="zapiszJako_Click"/>
+        <Button x:Name="utworz" Content="Nowy dokument" HorizontalAlignment="Left" Margin="63,41,0,0" VerticalAlignment="Top" Click="utworz_Click" />
+        <Label x:Name="label5" Content="Imię i Nazwisko" HorizontalAlignment="Left" Margin="48,516,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="imieINazwisko" HorizontalAlignment="Left" Margin="55,547,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <Label x:Name="label5_Copy" Content="Adres" HorizontalAlignment="Left" Margin="206,516,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="adresOsoba" IsReadOnly="True" HorizontalAlignment="Left" Margin="213,547,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewMouseDown="adresOsoba_PreviewMouseDown" IsEnabled="False"/>
+        <Label x:Name="label5_Copy1" Content="Data urodzenia/Nr dowodu/Pesel" HorizontalAlignment="Left" Margin="365,516,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="DataDowodPesel" HorizontalAlignment="Left" Margin="372,547,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" MaxLength="13"/>
+        <Button x:Name="dodajOsoba" Content="Dodaj" HorizontalAlignment="Left" Margin="504,545,0,0" VerticalAlignment="Top" Click="dodajOsoba_Click" IsEnabled="False"/>
+        <Button x:Name="edytujOsoba" Content="Edytuj" HorizontalAlignment="Left" Margin="502,570,0,0" VerticalAlignment="Top" IsEnabled="False" Click="edytujOsoba_Click"/>
+        <Label x:Name="label5_Copy2" Content="Telefon" HorizontalAlignment="Left" Margin="50,580,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="telefonOsoba" HorizontalAlignment="Left" Margin="57,611,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+
+        <Popup x:Name="oknoAdres" IsOpen="False" Width="600" Height="80" Placement="Center">
+            <Grid Background="Aqua">
+                <Label Content="Ulica" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                <TextBox x:Name="ulica" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,40,0,0" Width="120" Height="18"/>
+                <Label Content="Nr" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,10,0,0"/>
+                <TextBox x:Name="nr" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,40,0,0" Width="120" Height="18"/>
+                <Label Content="Kod pocztowy" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="280,10,0,0"/>
+                <TextBox x:Name="kodPocztowy" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="280,40,0,0" Width="120" Height="18"/>
+                <Label Content="Miasto" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,10,0,0"/>
+                <TextBox x:Name="miasto" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,40,0,0" Width="120" Height="18"/>
+                <Button x:Name="ok" Content="Ok" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="560,40,0,0" Click="ok_Click"/>
+            </Grid>
+        </Popup>
+        <Popup x:Name="oknoAdresPacjent" IsOpen="False" Width="600" Height="80" Placement="Center">
+            <Grid Background="Aqua">
+                <Label Content="Ulica" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+                <TextBox x:Name="ulicaPacjent" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,40,0,0" Width="120" Height="18"/>
+                <Label Content="Nr" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,10,0,0"/>
+                <TextBox x:Name="nrPacjent" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,40,0,0" Width="120" Height="18"/>
+                <Label Content="Kod pocztowy" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="280,10,0,0"/>
+                <TextBox x:Name="kodPocztowyPacjent" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="280,40,0,0" Width="120" Height="18"/>
+                <Label Content="Miasto" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,10,0,0"/>
+                <TextBox x:Name="miastoPacjent" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="420,40,0,0" Width="120" Height="18"/>
+                <Button x:Name="okPacjent" Content="Ok" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="560,40,0,0" Click="okPacjent_Click"/>
+            </Grid>
+        </Popup>
+        <Image x:Name="urodzinKalendarz" HorizontalAlignment="Left" Height="34" Margin="458,565,0,0" VerticalAlignment="Top" Width="25" Source="/iconfinder_calendar_285670.png" MouseUp="urodzinKalendarz_MouseUp" IsEnabled="False" />
+        <GroupBox x:Name="groupBox2" Height="200" Width="200" Visibility="Hidden">
+            <Calendar x:Name="kalenardz" SelectedDatesChanged="kalenardz_SelectedDatesChanged"/>
+        </GroupBox>
+        <Button x:Name="reset" Content="Reset" HorizontalAlignment="Left" Margin="502,593,0,0" VerticalAlignment="Top" IsEnabled="False" Click="reset_Click"/>
+        <Image x:Name="calendar_Copy" HorizontalAlignment="Left" Height="34" Margin="275,182,0,0" VerticalAlignment="Top" Width="25" Source="/iconfinder_calendar_285670.png" MouseUp="calendar_Copy_MouseUp" IsEnabled="False" />
+        <GroupBox x:Name="groupBox2_Copy" Height="200" Width="200" Visibility="Hidden">
+            <Calendar x:Name="kalenardz_Copy" SelectedDatesChanged="kalenardz_Copy_SelectedDatesChanged"/>
+        </GroupBox>
+        <TextBox x:Name="komentarz" IsReadOnly="True" HorizontalAlignment="Left" Margin="66,376,0,0"  TextWrapping="NoWrap" VerticalAlignment="Top" Width="480" IsEnabled="False"/>
+        <Label x:Name="label6" Content="Komentarz" HorizontalAlignment="Left" Margin="69,350,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="printPDF" Content="Drukuj" HorizontalAlignment="Left" Margin="487,46,0,0" VerticalAlignment="Top" IsEnabled="False" Visibility="Hidden" Click="printPDF_Click"/>
+    </Grid>
+</Window>
